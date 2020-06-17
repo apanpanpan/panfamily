@@ -196,16 +196,22 @@ app.post('/addRecipe', function (req, res) {
   .then(result => {
     if (result) {
       console.log("already exists")
-      res.render('addRecipe', {
-        'successfullyAdded': false
+      res.render('recipeForm', {
+        'successfullyAdded': false,
+        title: "Add a Recipe",
+        actionurl: "/addRecipe",
+        method: "POST"
       })
     } else {
       req = processInput(req)
       recipes.insertOne(req.body)
       .then(result => {
         console.log(`New recipe added with the id: ${result.insertedId}`)
-        res.render('addRecipe', {
-          'successfullyAdded': true
+        res.render('recipeForm', {
+          'successfullyAdded': true,
+          title: "Add a Recipe",
+          actionurl: "/addRecipe",
+          method: "POST"
         })
       })
       .catch(error => console.error(error))
