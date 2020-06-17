@@ -1,0 +1,91 @@
+/* div {
+  border: 1px solid blue;
+} */
+
+.content {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
+/*recipes */
+.defaultsink {
+    position: absolute; left: -100%;
+}
+
+.active, .btn:hover {
+  background-color: #666;
+  color: white;
+}
+
+/* recipes: tile view */
+img[class^="food-img"] {
+  width: 100%;
+  object-fit: cover;
+}
+
+.food-img-sm {
+  min-height: 150px;
+  height: 15vw;
+}
+
+.food-img-md {
+  min-height: 200px;
+  height: 23vw;
+}
+
+.food-img-lg {
+  min-height: 250px;
+  height: 33vw;
+}
+
+/* recipes: modal view */
+.food-img-modal {
+  min-height: 300px;
+  height: 23vw;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* add recipe */
+.show-preview-img {
+  height: 20vw;
+  width: 20vw;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.hide-preview-img {
+  display: none
+}
+
+/*meals*/
+.meals-body {
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.col-right {
+  margin-left: -15px;
+}
+
+.col-left {
+  margin-left: 15px;
+}
+
+.food-img-2 {
+  min-height: 400px;
+  height: 35vw;
+}
+
+.food-img-4 {
+  min-height: 200px;
+  height: 17.5vw;
+}
+
+/* for 5 */
+.food-img-3 {
+  min-height: 133px;
+  height: 11.66vw;
+}

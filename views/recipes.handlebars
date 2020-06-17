@@ -1,0 +1,116 @@
+<script>
+$('select').selectpicker();
+</script>
+
+<form method="GET" action='/recipes'>
+  <input type="submit" class="defaultsink" name="size" value={{size}}>
+  <div class="form-row">
+    <div class="col-3">
+      <button class="btn {{#if (eq size "lg")}} active{{/if}}" name="size" value="lg">L</button>
+      <button class="btn {{#if (eq size "md")}} active{{/if}}" name="size" value="md">M</button>
+      <button class="btn {{#if (eq size "sm")}} active{{/if}}" name="size" value="sm">S</button>
+    </div>
+    <div class="form-group col text-right">
+      <select name="categories" class="selectpicker" multiple data-live-search="false" title="Filters" data-width="auto">
+        <optgroup label="Meat">
+          <option value="chicken">Chicken</option>
+          <option value="beef">Beef</option>
+          <option value="pork">Pork</option>
+          <option value="seafood">Seafood</option>
+        </optgroup>
+        <option value="rice">Rice</option>
+        <option value="noodles">Noodles</option>
+        <option value="veggies">Veggies</option>
+      </select>
+    </div>
+    <div class="form-group col-2">
+      <input type="text" class="form-control" name="text" id="text" {{#if text}} value='{{text}}' {{else}} placeholder="Other" {{/if}}>
+    </div>
+    <div class="form-group col-2">
+      <button class="btn" name="size" value={{size}}>Search</button>
+    </div>
+  </div>
+</form>
+{{#each foodArray}}
+  {{#unless (math @index "%" (tilesPerRow ../size))}}
+    <div class="row">
+  {{/unless}}
+  <div class="col-md-{{math 12 "/" (tilesPerRow ../size)}}">
+    <div data-toggle="modal" data-target="#foodItem{{@index}}">
+      <img class="food-img-{{../size}}" src="{{this.url}}"></img>
+    </div>
+  </div>
+
+  <!-- pop up -->
+  <div class="modal fade" id="foodItem{{@index}}" tabindex="-1" role="dialog" aria-labelledby="foodItem{{@index}}Name" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <form method="POST" action='/recipes'>
+          <input type="hidden" name="id" value="{{this._id}}">
+          <button class="btn">Delete</button>
+        </form>
+        <form method="GET" action='/editRecipe' style="margin-left: 5px">
+          <input type="hidden" name="id" value="{{this._id}}">
+          <button class="btn">Edit</button>
+        </form>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- image -->
+          <div class="col-md-6">
+            <img class="food-img-modal" src={{this.url}}>
+          </div>
+
+          <!-- information -->
+          <div class="col-md-6">
+            <h5 class="modal-title" id="#foodItem{{@index}}Name"><a href="/recipe?id={{this._id}}">{{this.name}}</a></h5>
+            {{#if this.ingredients}}
+              <p>Ingredients:
+                {{#if (math this.ingredients.length "=" 1)}}
+                  {{this.ingredients}}
+                {{else}}
+                  {{#each this.ingredients}}
+                  {{#if (math @index "=" (math ../this.ingredients.length "-" 1))}}
+                    {{this}}
+                  {{else}}
+                    {{this}},
+                  {{/if}}
+                  {{/each}}
+                {{/if}}
+              </p>
+            {{/if}}
+            {{#if this.instructions}}
+              <ul>
+              {{#each this.instructions}}
+                <li>{{this}}</li>
+              {{/each}}
+              </ul>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      {{#if this.categories}}
+      <div class="modal-footer">
+        Categories: {{this.categories}}
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</div>
+  {{#unless (math (math @index "+" 1) "%" (tilesPerRow ../size))}}
+    </div>
+    <br>
+  {{/unless}}
+{{/each}}
+
+<script>
+arr = []
+{{#each this.categories}}
+  arr.push("{{this}}")
+{{/each}}
+$('.selectpicker').selectpicker('val', arr)
+</script>

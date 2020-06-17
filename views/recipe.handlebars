@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-6">
+    <img class="food-img" src={{this.url}}>
+  </div>
+  <div class="col-6">
+    <h1>{{this.name}}</h1>
+    {{#if this.ingredients}}
+      <p>Ingredients:
+        {{#if (math this.ingredients.length "=" 1)}}
+          {{this.ingredients}}
+        {{else}}
+          {{#each this.ingredients}}
+          {{#if (math @index "=" (math ../this.ingredients.length "-" 1))}}
+            {{this}}
+          {{else}}
+            {{this}},
+          {{/if}}
+          {{/each}}
+        {{/if}}
+      </p>
+    {{/if}}
+    {{#if this.instructions}}
+      <ul>
+      {{#each this.instructions}}
+        <li>{{this}}</li>
+      {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+</div>

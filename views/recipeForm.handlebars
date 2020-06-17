@@ -1,0 +1,98 @@
+<script src="/recipeForm.js"></script>
+<!-- pop up -->
+<div class="modal fade" id="success" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Saved!
+    </div>
+  </div>
+</div>
+</div>
+
+<h2>{{title}}</h2>
+<br>
+<form method="{{method}}" action='{{actionurl}}'>
+  {{#if this._id}}<input type="hidden" name="id" value="{{this._id}}">{{/if}}
+  <div class="form-group row">
+    <label for="recipeName" class="col-2 col-form-label">Name</label>
+    <div class="col">
+      <input type="text" class="form-control" name="name" id="recipeName" value='{{this.name}}' placeholder="Shrimp Dumplings" required>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="imageURL" class="col-2 col-form-label">Image URL</label>
+    <div class="col">
+      <input type="text" class="form-control" name="url" id="imageURL" value='{{this.url}}' placeholder="photos.google.com/hi" required onkeyup="imagePreview()">
+      <img id="imageURLPreview" src='{{this.url}}' class={{#if this.url}}"show-preview-img"{{else}}"hide-preview-img"{{/if}}>
+    </div>
+  </div>
+  <div>
+    <div class="form-group row">
+      <label for="ingredients" class="col-2 col-form-label">Ingredients</label>
+      <div class="col">
+        <div id="ingredients-group">
+          {{#if this.ingredients}}
+          {{#each this.ingredients}}
+            <input type="text" class="form-control" name="ingredients" id="ingredients" value='{{this}}'>
+          {{/each}}
+          {{else}}
+            <input type="text" class="form-control" name="ingredients" id="ingredients" placeholder="Chicken">
+          {{/if}}
+        </div>
+        <button type="button" class="btn" onclick="addIngredient();">+</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="form-group row">
+      <label for="instructions" class="col-2 col-form-label">Instructions</label>
+      <div class="col">
+        <div id="instructions-group">
+          {{#if this.instructions}}
+          {{#each this.instructions}}
+            <input type="text" class="form-control" name="instructions" id="instructions" value='{{this}}'>
+          {{/each}}
+          {{else}}
+            <input type="text" class="form-control" name="instructions" id="instructions" placeholder="Season salmon with salt and pepper">
+          {{/if}}
+        </div>
+        <button type="button" class="btn" onclick="addInstruction();">+</button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row" id="categories">
+    <label for="categories" class="col-2 col-form-label">Categories</label><br>
+    <div class="col">
+      <select name="categories" class="selectpicker" multiple title="None selected" data-width="50%">
+        <optgroup label="Meat">
+          <option value="chicken">Chicken</option>
+          <option value="beef">Beef</option>
+          <option value="pork">Pork</option>
+          <option value="seafood">Seafood</option>
+        </optgroup>
+        <option value="rice">Rice</option>
+        <option value="noodles">Noodles</option>
+        <option value="veggies">Veggies</option>
+      </select>
+    </div>
+  </div>
+  <input type="submit" class="btn" value="Save">
+</form>
+
+<script>
+arr = []
+{{#each this.categories}}
+  arr.push("{{this}}")
+{{/each}}
+$('.selectpicker').selectpicker('val', arr)
+
+{{#if successfullyAdded}}
+$('#success').modal('show')
+{{/if}}
+</script>

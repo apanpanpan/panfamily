@@ -1,0 +1,52 @@
+<script>
+function addFood() {
+  var i = document.createElement("input");
+  i.type = "text";
+  i.className = "form-control";
+  i.name = "foodItems";
+  i.id = "food";
+  i.required = true
+
+  $("#food-group").append(i);
+}
+
+$('select').selectpicker();
+</script>
+<!-- pop up -->
+<div class="modal fade" id="success" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Created!
+    </div>
+  </div>
+</div>
+</div>
+
+<form method="POST" action='/addMeal'>
+  <div>
+    <div class="form-group" id="categories">
+      <label for="foodItems">Select at least two recipes</label><br>
+      <select name="foodItems" class="selectpicker" multiple data-live-search="true" data-max-options="5" title="Recipes" data-width="50%">
+        {{#each foodArray}}
+          <option value="{{this._id}} {{this.url}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group" id="caption">
+      <label for="caption">Caption</label>
+      <input type="text" class="form-control" name="caption" id="caption" placeholder="Dinner for two">
+    </div>
+  <input type="submit" class="btn" value="Create meal!">
+</form>
+
+<script>
+{{#if successfullyAdded}}
+$('#success').modal('show')
+{{/if}}
+</script>

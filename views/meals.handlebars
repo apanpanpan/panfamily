@@ -1,0 +1,110 @@
+<div class="meals-body">
+{{#each meals}}
+  {{#unless (math this.foodItems.length "%" 2)}}
+    {{#each this.foodItems}}
+      {{#if (even @index)}}
+        <div class="row">
+      {{/if}}
+          <div class="col-md-6">
+            <a href="/recipe?id={{this.foodId}}">
+            <img class="food-img-{{../this.foodItems.length}} {{#if (even @index)}}col-left{{else}}col-right{{/if}}" src="{{this.url}}"></img>
+            </a>
+          </div>
+      {{#unless (even @index)}}
+        </div>
+      {{/unless}}
+    {{/each}}
+    <p>{{this.caption}}</p>
+  {{/unless}}
+  {{#if (math this.foodItems.length "=" 3)}}
+    {{#each this.foodItems}}
+      {{#if (math @index "=" 0)}}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-12">
+                <a href="/recipe?id={{this.foodId}}">
+                <img class="food-img-4 col-left" src="{{this.url}}"></img>
+                </a>
+              </div>
+            </div>
+      {{/if}}
+      {{#if (math @index "=" 1)}}
+            <div class="row">
+              <div class="col-12">
+                <a href="/recipe?id={{this.foodId}}">
+                <img class="food-img-4 col-left" src="{{this.url}}"></img>
+                </a>
+              </div>
+            </div>
+          </div>
+      {{/if}}
+      {{#if (math @index "=" 2)}}
+          <div class="col-md-6">
+            <a href="/recipe?id={{this.foodId}}">
+            <img class="food-img-2 col-right" src="{{this.url}}"></img>
+            </a>
+          </div>
+        </div>
+      {{/if}}
+    {{/each}}
+    <p>{{this.caption}}</p>
+  {{/if}}
+  {{#if (math this.foodItems.length "=" 5)}}
+    {{#each this.foodItems}}
+    {{#if (math @index "=" 0)}}
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-12">
+              <a href="/recipe?id={{this.foodId}}">
+              <img class="food-img-4 col-left" src="{{this.url}}"></img>
+              </a>
+            </div>
+          </div>
+    {{/if}}
+    {{#if (math @index "=" 1)}}
+          <div class="row">
+            <div class="col-12">
+              <a href="/recipe?id={{this.foodId}}">
+              <img class="food-img-4 col-left" src="{{this.url}}"></img>
+              </a>
+            </div>
+          </div>
+        </div>
+    {{/if}}
+    {{#if (math @index "=" 2)}}
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-12">
+              <a href="/recipe?id={{this.foodId}}">
+              <img class="food-img-3 col-right" src="{{this.url}}"></img>
+              </a>
+            </div>
+          </div>
+    {{/if}}
+    {{#if (math @index "=" 3)}}
+          <div class="row">
+            <div class="col-12">
+              <a href="/recipe?id={{this.foodId}}">
+              <img class="food-img-3 col-right" src="{{this.url}}"></img>
+              </a>
+            </div>
+          </div>
+    {{/if}}
+    {{#if (math @index "=" 4)}}
+          <div class="row">
+            <div class="col-12">
+              <a href="/recipe?id={{this.foodId}}">
+              <img class="food-img-3 col-right" src="{{this.url}}"></img>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{/each}}
+    <p>{{this.caption}}</p>
+  {{/if}}
+{{/each}}
+</div>
