@@ -15,9 +15,16 @@
 </div>
 </div>
 
-<h2>{{title}}</h2>
-<br>
 <form method="{{method}}" action='{{actionurl}}'>
+  <div class="row">
+    <div class="col-auto mr-auto">
+      <h2>{{title}}</h2>
+    </div>
+    <div class="col-auto">
+      <input type="submit" class="btn" value="Save">
+    </div>
+  </div>
+  <br>
   {{#if this._id}}<input type="hidden" name="id" value="{{this._id}}">{{/if}}
   <div class="form-group row">
     <label for="recipeName" class="col-2 col-form-label">Name</label>
