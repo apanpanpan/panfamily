@@ -5,12 +5,12 @@ $('select').selectpicker();
 <form method="GET" action='/recipes'>
   <input type="submit" class="defaultsink" name="size" value={{size}}>
   <div class="form-row">
-    <div class="col-3">
+    <div class="col-auto mr-auto">
       <button class="btn {{#if (eq size "lg")}} active{{/if}}" name="size" value="lg">L</button>
       <button class="btn {{#if (eq size "md")}} active{{/if}}" name="size" value="md">M</button>
       <button class="btn {{#if (eq size "sm")}} active{{/if}}" name="size" value="sm">S</button>
     </div>
-    <div class="form-group col text-right">
+    <div class="form-group col-auto text-right">
       <select name="categories" class="selectpicker" multiple data-live-search="false" title="Filters" data-width="auto">
         <optgroup label="Meat">
           <option value="chicken">Chicken</option>
@@ -25,10 +25,10 @@ $('select').selectpicker();
         <option value="dessert">Dessert</option>
       </select>
     </div>
-    <div class="form-group col-2">
+    <div class="form-group col-auto">
       <input type="text" class="form-control" name="text" id="text" {{#if text}} value='{{text}}' {{else}} placeholder="Other" {{/if}}>
     </div>
-    <div class="form-group col-2">
+    <div class="form-group col-auto">
       <button class="btn" name="size" value={{size}}>Search</button>
     </div>
   </div>
