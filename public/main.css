@@ -22,6 +22,7 @@
 img[class^="food-img"] {
   width: 100%;
   object-fit: cover;
+  border-radius: 4px;
 }
 
 .food-img-sm {
