@@ -39,6 +39,31 @@ img[class^="food-img"] {
   height: 33vw;
 }
 
+.overlay-container {
+  position: relative
+}
+
+p[class^="overlay"] {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-shadow: 0px 3px 3px #282828;
+}
+
+.overlay-sm {
+  font-size: 15px;
+}
+
+.overlay-md {
+  font-size: 15px;
+}
+
+.overlay-lg {
+  font-size: 25px;
+}
+
 /* recipes: modal view */
 .food-img-modal {
   min-height: 300px;

@@ -36,8 +36,9 @@ $('select').selectpicker();
     <div class="row">
   {{/unless}}
   <div class="col-md-{{math 12 "/" (tilesPerRow ../size)}}">
-    <div data-toggle="modal" data-target="#foodItem{{@index}}">
+    <div class="overlay-container" data-toggle="modal" data-target="#foodItem{{@index}}">
       <img class="food-img-{{../size}}" src="{{this.url}}"></img>
+      <p class="overlay-{{../size}}">{{this.name}}</p>
     </div>
   </div>
 
