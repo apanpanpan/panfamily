@@ -197,7 +197,7 @@ app.post('/addRecipe', function (req, res) {
     if (result) {
       console.log("already exists")
       res.render('recipeForm', {
-        'successfullyAdded': false,
+        message: "Recipe with that name already exists",
         title: "Add a Recipe",
         actionurl: "/addRecipe",
         method: "POST"
@@ -208,7 +208,7 @@ app.post('/addRecipe', function (req, res) {
       .then(result => {
         console.log(`New recipe added with the id: ${result.insertedId}`)
         res.render('recipeForm', {
-          'successfullyAdded': true,
+          message: "Sucessfully Added!",
           title: "Add a Recipe",
           actionurl: "/addRecipe",
           method: "POST"
@@ -249,7 +249,7 @@ app.post('/editRecipe', function(req, res) {
           req.body.title = "Edit Recipe"
           req.body.actionurl = '/editRecipe'
           req.body.method = "POST"
-          req.body.successfullyAdded = true
+          req.body.message = "Sucessfully Edited!",
           res.render('recipeForm', req.body)
       } else {
         //need to update meals
@@ -260,7 +260,7 @@ app.post('/editRecipe', function(req, res) {
             req.body.title = "Edit Recipe"
             req.body.actionurl = '/editRecipe'
             req.body.method = "POST"
-            req.body.successfullyAdded = true
+            req.body.message = "Sucessfully Edited!",
             res.render('recipeForm', req.body)
           }
         }
