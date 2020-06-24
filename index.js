@@ -269,7 +269,7 @@ app.post('/editRecipe', function(req, res) {
         for (meal of mealArr) {
           for(food of meal.foodItems) {
             if (food.foodId == req.body.id) {
-              food.url = req.body.url
+              food.url = req.body.url[0]
               mealQuery = {_id: ObjectId(meal._id)}
               meals.updateOne(mealQuery, {$set: {foodItems: meal.foodItems}})
               .then(updatedMeal => {
@@ -356,6 +356,10 @@ app.listen(process.env.PORT || 3000, function() {
 })
 
 function processInput(req) {
+  if (typeof req.body.url === 'string') {
+    req.body.url = [req.body.url]
+  }
+  req.body.url = req.body.url.filter(item => item.length > 0)
   if (req.body.ingredients) {
     if (typeof req.body.ingredients === 'string') {
       req.body.ingredients = [req.body.ingredients]

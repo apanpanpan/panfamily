@@ -20,9 +20,29 @@ function addInstruction() {
   $("#instructions-group").append(i);
 }
 
-function imagePreview() {
-  var preview = document.getElementById("imageURLPreview");
-  var text = document.getElementById("imageURL");
+function addPhoto() {
+  count++
+  var i = document.createElement("input");
+  i.type = "text";
+  i.className = "form-control";
+  i.name = "url";
+  i.id = `imageURL${count}`;
+  i.placeholder = "photos.google.com/hi"
+  i.onkeyup = function(closureCount) {
+    imagePreview(closureCount);
+  }.bind(this, count)
+
+  var img = document.createElement("img");
+  img.id = `imageURLPreview${count}`;
+  img.className = "hide-preview-img";
+
+  $("#photos-group").append(i);
+  $("#photos-group").append(img);
+}
+
+function imagePreview(id) {
+  var preview = document.getElementById(`imageURLPreview${id}`);
+  var text = document.getElementById(`imageURL${id}`);
   if (text.value != "") {
     preview.className = "show-preview-img"
   } else {

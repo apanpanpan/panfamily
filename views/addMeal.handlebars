@@ -34,7 +34,7 @@ $('select').selectpicker();
       <label for="foodItems">Select at least two recipes</label><br>
       <select name="foodItems" class="selectpicker" multiple data-live-search="true" data-max-options="5" title="Recipes" data-width="50%">
         {{#each foodArray}}
-          <option value="{{this._id}} {{this.url}}">{{this.name}}</option>
+          <option value="{{this._id}} {{this.url.0}}">{{this.name}}</option>
         {{/each}}
       </select>
     </div>

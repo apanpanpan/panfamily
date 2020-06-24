@@ -35,8 +35,18 @@
   <div class="form-group row">
     <label for="imageURL" class="col-2 col-form-label">Image URL</label>
     <div class="col">
-      <input type="text" class="form-control" name="url" id="imageURL" value='{{this.url}}' placeholder="photos.google.com/hi" required onkeyup="imagePreview()">
-      <img id="imageURLPreview" src='{{this.url}}' class={{#if this.url}}"show-preview-img"{{else}}"hide-preview-img"{{/if}}>
+      <div id="photos-group">
+        {{#if this.url}}
+        {{#each this.url}}
+          <input type="text" class="form-control" name="url" id="imageURL{{@index}}" value='{{this}}' placeholder="photos.google.com/hi" onkeyup="imagePreview({{@index}})">
+          <img id="imageURLPreview{{@index}}" src='{{this}}' class="show-preview-img">
+        {{/each}}
+        {{else}}
+          <input type="text" class="form-control" name="url" id="imageURL0" placeholder="photos.google.com/hi" required onkeyup="imagePreview(0)">
+          <img id="imageURLPreview0" class="hide-preview-img">
+        {{/if}}
+      </div>
+      <button type="button" class="btn" onclick="addPhoto();">+</button>
     </div>
   </div>
   <div>
@@ -104,4 +114,6 @@ $('.selectpicker').selectpicker('val', arr)
 {{#if message}}
 $('#message').modal('show')
 {{/if}}
+
+count={{#if this.url}}{{this.url.length}}{{else}}0{{/if}}
 </script>
