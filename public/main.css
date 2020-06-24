@@ -25,21 +25,6 @@ img[class^="food-img"] {
   border-radius: 4px;
 }
 
-.food-img-sm {
-  min-height: 150px;
-  height: 15vw;
-}
-
-.food-img-md {
-  min-height: 200px;
-  height: 23vw;
-}
-
-.food-img-lg {
-  min-height: 250px;
-  height: 33vw;
-}
-
 .overlay-container {
   position: relative
 }
