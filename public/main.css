@@ -58,6 +58,10 @@ p[class^="overlay"] {
   object-fit: cover;
 }
 
+.carousel-inner {
+    border-radius: 5px;
+}
+
 /* add recipe */
 .show-preview-img {
   height: 20vw;
