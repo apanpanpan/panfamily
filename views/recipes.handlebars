@@ -144,13 +144,22 @@ $('.selectpicker').selectpicker('val', arr);
 {{#if this.fromSelect}}
 $('.selectpicker').selectpicker('toggle');
 {{/if}}
+
 $('.selectpicker').on("change", function() {
   var i = document.createElement("input");
   i.type = "text";
   i.name = "fromSelect";
   i.value = "true";
   i.hidden = true;
+
+  var s = document.createElement("input");
+  s.type = "text";
+  s.name = "size";
+  s.value = '{{size}}';
+  s.hidden = true;
+
   $('#filter').append(i);
+  $('#filter').append(s);
   $('#filter').submit();
 });
 </script>
