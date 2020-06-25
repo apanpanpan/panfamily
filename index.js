@@ -52,7 +52,38 @@ app.engine('handlebars', hbs(
             numPerRow = 4
         }
         return numPerRow
-      }
+      },
+      parentObject: function(name) {
+        return '../Meat'
+        // return `../${name}`
+      },
+      truncate: function(name, size) {
+        //temporayy bc i cant tell between chiense and english
+        if (name.length > 20) {
+          return name.substring(0, 20) + "..."
+        }
+        return name
+        lgCutoff = 40
+        mdCutoff = 15
+        smCutoff = 7
+        switch(size) {
+          case "lg":
+            if(name.length > lgCutoff) {
+              return name.substring(0, lgCutoff) + "..."
+            }
+            return name
+          case "md":
+            if(name.length > mdCutoff) {
+              return name.substring(0, mdCutoff) + "..."
+            }
+            return name
+          case "sm":
+            if(name.length > smCutoff) {
+              return name.substring(0, smCutoff) + "..."
+            }
+            return name
+          }
+       }
     }
   }));
 app.set('view engine', 'handlebars');
