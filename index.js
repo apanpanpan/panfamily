@@ -139,13 +139,20 @@ app.get('/recipes', function (req, res) {
     size = req.query.size
   }
 
+  //if rerendering from a filter
+  fromSelect = false
+  if (req.query.fromSelect) {
+    fromSelect = req.query.fromSelect
+  }
+
   recipes.find(query).toArray()
     .then(results => {
       res.render('recipes', {
         "foodArray": results,
         "categories": req.query.categories,
         "size": size,
-        "text": req.query.text
+        "text": req.query.text,
+        "fromSelect": fromSelect,
       })
       return
     })

@@ -2,7 +2,7 @@
 $('select').selectpicker();
 </script>
 
-<form method="GET" action='/recipes'>
+<form method="GET" action='/recipes' id="filter">
   <input type="submit" class="defaultsink" name="size" value={{size}}>
   <div class="form-row">
     <div class="col-auto mr-auto">
@@ -140,5 +140,17 @@ arr = []
 {{#each this.categories}}
   arr.push("{{this}}")
 {{/each}}
-$('.selectpicker').selectpicker('val', arr)
+$('.selectpicker').selectpicker('val', arr);
+{{#if this.fromSelect}}
+$('.selectpicker').selectpicker('toggle');
+{{/if}}
+$('.selectpicker').on("change", function() {
+  var i = document.createElement("input");
+  i.type = "text";
+  i.name = "fromSelect";
+  i.value = "true";
+  i.hidden = true;
+  $('#filter').append(i);
+  $('#filter').submit();
+});
 </script>
