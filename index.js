@@ -251,7 +251,14 @@ app.post('/addRecipe', function (req, res) {
           method: "POST"
         })
       })
-      .catch(error => console.error(error))
+      .catch(error => {
+        console.error(error)
+        req.body.message = "An error occured in the database connection. Please try again."
+        req.body.title = "Add a Recipe"
+        req.body.actionurl = "/addRecipe"
+        req.body.method = "POST"
+        res.render('recipeForm', req.body)
+      })
     }
   })
 })
