@@ -290,11 +290,9 @@ app.post('/editRecipe', function(req, res) {
     .then(mealArr => {
       //recipe is not in any meals
       if (mealArr.length == 0) {
-          req.body.title = "Edit Recipe"
-          req.body.actionurl = '/editRecipe'
-          req.body.method = "POST"
-          req.body.message = "Sucessfully Edited!",
-          res.render('recipeForm', req.body)
+          req.body.message = "Sucessfully Edited!"
+          req.body._id = req.body.id
+          res.render('recipe', req.body)
       } else {
         //need to update meals
         doneCount = mealArr.length
@@ -304,8 +302,9 @@ app.post('/editRecipe', function(req, res) {
             req.body.title = "Edit Recipe"
             req.body.actionurl = '/editRecipe'
             req.body.method = "POST"
-            req.body.message = "Sucessfully Edited!",
-            res.render('recipeForm', req.body)
+            req.body.message = "Sucessfully Edited!"
+            req.body._id = req.body.id
+            res.render('recipe', req.body)
           }
         }
 
