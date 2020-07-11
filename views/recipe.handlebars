@@ -14,6 +14,23 @@
 </div>
 </div>
 
+<!-- delete pop up -->
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-hidden="false">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-body text-center">
+      <p>This will permanently delete this recipe.<br>
+      Please confirm this action.</p>
+      <form class="d-inline" method="POST" action='/recipes'>
+        <input type="hidden" name="id" value="{{this._id}}">
+        <button class="btn btn-danger">Delete</button>
+      </form>
+      <button class="btn" data-toggle="modal" data-target="#confirmDelete">Cancel</button>
+    </div>
+  </div>
+</div>
+</div>
+
 <div class="row" style="margin-top: -60px; margin-bottom: 20px;">
   <div class="col-auto ml-auto">
     <form class="d-inline" method="GET" action='/editRecipe'>
@@ -22,12 +39,9 @@
         <img src="/editIcon.svg" width=25 style="padding-left:4px; padding-bottom:2px">
       </button>
     </form>
-    <form class="d-inline" method="POST" action='/recipes'>
-      <input type="hidden" name="id" value="{{this._id}}">
-      <button class="btn">
-        <img src="/trashIcon.svg" width=24 style="">
-      </button>
-    </form>
+    <button class="btn" data-toggle="modal" data-target="#confirmDelete">
+      <img src="/trashIcon.svg" width=24 style="">
+    </button>
   </div>
 </div>
 <div class="row">
