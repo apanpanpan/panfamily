@@ -1,3 +1,19 @@
+<div class="row" style="margin-top: -60px; margin-bottom: 20px;">
+  <div class="col-auto ml-auto">
+    <button class="btn">
+      <a href="/editRecipe?id={{this._id}}">
+        <img src="/editIcon.svg" width=25 style="padding-left:4px; padding-bottom:2px">
+      </a>
+    </button>
+    </a>
+    <form class="d-inline" method="POST" action='/recipes'>
+      <input type="hidden" name="id" value="{{this._id}}">
+      <button class="btn">
+        <img src="/trashIcon.svg" width=24 style="">
+      </button>
+    </form>
+  </div>
+</div>
 <div class="row">
   <div class="col-6">
     <div id="photoGallery" class="carousel slide" data-ride="carousel">

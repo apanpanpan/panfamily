@@ -51,10 +51,6 @@ $('select').selectpicker();
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <form method="POST" action='/recipes'>
-          <input type="hidden" name="id" value="{{this._id}}">
-          <button class="btn">Delete</button>
-        </form>
         <form method="GET" action='/editRecipe' style="margin-left: 5px">
           <input type="hidden" name="id" value="{{this._id}}">
           <button class="btn">Edit</button>
