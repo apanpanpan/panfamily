@@ -228,38 +228,25 @@ app.get('/addRecipe', function (req, res) {
 })
 
 app.post('/addRecipe', function (req, res) {
-  var query = {name: req.body.name}
   req = processInput(req)
 
-  recipes.findOne(query)
+  recipes.insertOne(req.body)
   .then(result => {
-    if (result) {
-      console.log("already exists")
-      req.body.message = "Recipe with that name already exists"
-      req.body.title = "Add a Recipe"
-      req.body.actionurl = "/addRecipe"
-      req.body.method = "POST"
-      res.render('recipeForm', req.body)
-    } else {
-      recipes.insertOne(req.body)
-      .then(result => {
-        console.log(`New recipe added with the id: ${result.insertedId}`)
-        res.render('recipeForm', {
-          message: "Sucessfully Added!",
-          title: "Add a Recipe",
-          actionurl: "/addRecipe",
-          method: "POST"
-        })
-      })
-      .catch(error => {
-        console.error(error)
-        req.body.message = "An error occured in the database connection. Please try again."
-        req.body.title = "Add a Recipe"
-        req.body.actionurl = "/addRecipe"
-        req.body.method = "POST"
-        res.render('recipeForm', req.body)
-      })
-    }
+    console.log(`New recipe added with the id: ${result.insertedId}`)
+    res.render('recipeForm', {
+      message: "Sucessfully Added!",
+      title: "Add a Recipe",
+      actionurl: "/addRecipe",
+      method: "POST"
+    })
+  })
+  .catch(error => {
+    console.error(error)
+    req.body.message = "An error occured in the database connection. Please try again."
+    req.body.title = "Add a Recipe"
+    req.body.actionurl = "/addRecipe"
+    req.body.method = "POST"
+    res.render('recipeForm', req.body)
   })
 })
 
