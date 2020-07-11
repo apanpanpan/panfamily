@@ -229,19 +229,18 @@ app.get('/addRecipe', function (req, res) {
 
 app.post('/addRecipe', function (req, res) {
   var query = {name: req.body.name}
+  req = processInput(req)
 
   recipes.findOne(query)
   .then(result => {
     if (result) {
       console.log("already exists")
-      res.render('recipeForm', {
-        message: "Recipe with that name already exists",
-        title: "Add a Recipe",
-        actionurl: "/addRecipe",
-        method: "POST"
-      })
+      req.body.message = "Recipe with that name already exists"
+      req.body.title = "Add a Recipe"
+      req.body.actionurl = "/addRecipe"
+      req.body.method = "POST"
+      res.render('recipeForm', req.body)
     } else {
-      req = processInput(req)
       recipes.insertOne(req.body)
       .then(result => {
         console.log(`New recipe added with the id: ${result.insertedId}`)
