@@ -422,5 +422,11 @@ function processInput(req) {
   if (req.body.categories == null) {
     req.body.categories = ""
   }
+  if (req.body.videourl) {
+    if (typeof req.body.videourl === 'string') {
+      req.body.videourl = [req.body.videourl]
+    }
+    req.body.videourl = req.body.videourl.filter(item => item.length > 0)
+  }
   return req
 }

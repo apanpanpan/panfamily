@@ -20,6 +20,17 @@ function addInstruction() {
   $("#instructions-group").append(i);
 }
 
+function addVideoUrl() {
+  var i = document.createElement("input");
+  i.type = "text";
+  i.className = "form-control";
+  i.name = "videourl";
+  i.id = "videourl";
+  i.placeholder = "youtube.com/hi"
+
+  $("#video-group").append(i);
+}
+
 function addPhoto() {
   count++
   var i = document.createElement("input");
