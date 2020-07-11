@@ -51,13 +51,11 @@ $('select').selectpicker();
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <form method="GET" action='/editRecipe' style="margin-left: 5px">
+        <h5 class="modal-title" id="#foodItem{{@index}}Name"><a href="/recipe?id={{this._id}}">{{this.name}}</a></h5>
+        <form method="GET" action='/editRecipe'>
           <input type="hidden" name="id" value="{{this._id}}">
-          <button class="btn">Edit</button>
+          <button class="btn"><img src="/editIcon.svg" width=25 style="padding-left:4px; padding-bottom:2px"></button>
         </form>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -91,7 +89,6 @@ $('select').selectpicker();
 
           <!-- information -->
           <div class="col-md-6">
-            <h5 class="modal-title" id="#foodItem{{@index}}Name"><a href="/recipe?id={{this._id}}">{{this.name}}</a></h5>
             {{#if this.ingredients}}
               <p>Ingredients:
                 {{#if (math this.ingredients.length "=" 1)}}
