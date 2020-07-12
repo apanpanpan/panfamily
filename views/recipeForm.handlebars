@@ -21,7 +21,7 @@
       <h2>{{title}}</h2>
     </div>
     <div class="col">
-      <input type="submit" class="btn" value="Save">
+      <button type="button" class="btn" onclick="submitForm()">Save</button>
     </div>
   </div>
   <br>
@@ -70,16 +70,8 @@
     <div class="form-group row">
       <label for="instructions" class="col-2 col-form-label">Instructions</label>
       <div class="col">
-        <div id="instructions-group">
-          {{#if this.instructions}}
-          {{#each this.instructions}}
-            <input type="text" class="form-control" name="instructions" id="instructions" value='{{this}}' placeholder="Season salmon with salt and pepper">
-          {{/each}}
-          {{else}}
-            <input type="text" class="form-control" name="instructions" id="instructions" placeholder="Season salmon with salt and pepper">
-          {{/if}}
-        </div>
-        <button type="button" class="btn" onclick="addInstruction();">+</button>
+        <div id="summernote"></div>
+        <input type="hidden" id="instructions" name="instructions" {{#if this.instructions}}value='{{this.instructions}}'{{/if}}>
       </div>
     </div>
   </div>
@@ -103,25 +95,42 @@
       </select>
     </div>
   </div>
-  <div class="form-group row">
-    <label for="videourl" class="col-2 col-form-label">Video URL</label>
-    <div class="col">
-      <div id="video-group">
-        {{#if this.videourl}}
-        {{#each this.videourl}}
-          <input type="text" class="form-control" name="videourl" id="videourl" value='{{this}}' placeholder="youtube.com/hi">
-        {{/each}}
-        {{else}}
-          <input type="text" class="form-control" name="videourl" id="videourl" placeholder="youtube.com/hi">
-        {{/if}}
-      </div>
-      <button type="button" class="btn" onclick="addVideoUrl();">+</button>
-    </div>
-  </div>
-  <input type="submit" class="btn" value="Save">
+  <button type="button" class="btn" onclick="submitForm()">Save</button>
+  <input type="submit" class="btn" value="Save" id="hiddenSubmit" style="visibility: hidden;">
 </form>
 
 <script>
+$('#summernote').summernote({
+        placeholder: '1. Beat 6 eggs...',
+        minHeight: 150,
+        toolbar: [
+          ['style', ['style']],
+          ['style', ['bold', 'italic', 'underline', 'clear']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['link', 'picture', 'video']],
+        ],
+        styleTags: [
+          { title: 'Heading', tag: 'h5', value: 'h5' },
+          'p'
+        ],
+});
+
+var sn = document.getElementsByClassName('note-editable')
+for (i=0; i<sn.length; i++) {
+  sn[i].addEventListener('paste', function (e) {
+    e.preventDefault()
+    var text = e.clipboardData.getData('text/plain')
+    document.execCommand('insertText', false, text)
+  })
+}
+{{#if this.instructions}}
+var sn = document.getElementsByClassName('note-editable')
+for (i=0; i<sn.length; i++) {
+  sn[i].innerHTML = ""
+}
+$('#summernote').summernote('pasteHTML', '{{{this.instructions}}}')
+{{/if}}
+
 arr = []
 {{#each this.categories}}
   arr.push("{{this}}")

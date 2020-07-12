@@ -9,17 +9,6 @@ function addIngredient() {
   $("#ingredients-group").append(i);
 }
 
-function addInstruction() {
-  var i = document.createElement("input");
-  i.type = "text";
-  i.className = "form-control";
-  i.name = "instructions";
-  i.id = "instructions";
-  i.placeholder = "Season salmon with salt and pepper"
-
-  $("#instructions-group").append(i);
-}
-
 function addVideoUrl() {
   var i = document.createElement("input");
   i.type = "text";
@@ -60,6 +49,16 @@ function imagePreview(id) {
     preview.className = "hide-preview-img"
   }
   preview.src = text.value
+}
+
+function submitForm() {
+  var markupStr = $('#summernote').summernote('code');
+  if (markupStr == "<p><br></p>") {
+    markupStr=null
+  }
+  var input = document.getElementById("instructions");
+  input.value = markupStr
+  document.getElementById("hiddenSubmit").click();
 }
 
 $('select').selectpicker();

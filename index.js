@@ -396,23 +396,11 @@ function processInput(req) {
     }
     req.body.ingredients = req.body.ingredients.filter(item => item.length > 0)
   }
-  if (req.body.instructions) {
-    if (typeof req.body.instructions === 'string') {
-      req.body.instructions = [req.body.instructions]
-    }
-    req.body.instructions = req.body.instructions.filter(item => item.length > 0)
-  }
   if (req.body.categories && typeof req.body.categories === 'string') {
     req.body.categories = [req.body.categories]
   }
   if (req.body.categories == null) {
     req.body.categories = ""
-  }
-  if (req.body.videourl) {
-    if (typeof req.body.videourl === 'string') {
-      req.body.videourl = [req.body.videourl]
-    }
-    req.body.videourl = req.body.videourl.filter(item => item.length > 0)
   }
   return req
 }
