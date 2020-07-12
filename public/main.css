@@ -48,7 +48,7 @@ p[class^="tile-caption"] {
 /* recipes: modal view */
 .food-img-modal {
   min-height: 300px;
-  height: 23vw;
+  height: 28vw;
   width: 100%;
   object-fit: cover;
 }
