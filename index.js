@@ -129,7 +129,7 @@ app.get('/recipes', function (req, res) {
   if (req.query.text) {
     var arr = []
     arr.push({categories: {$regex : `.*${req.query.text}.*`}})
-    arr.push({ingredients: {$regex : `.*${req.query.text}.*`}})
+    arr.push({instructions: {$regex : `.*${req.query.text}.*`}})
     arr.push({name: {$regex : `.*${req.query.text}.*`}})
     query = { $or: arr }
   }
@@ -390,12 +390,6 @@ function processInput(req) {
     req.body.url = [req.body.url]
   }
   req.body.url = req.body.url.filter(item => item.length > 0)
-  if (req.body.ingredients) {
-    if (typeof req.body.ingredients === 'string') {
-      req.body.ingredients = [req.body.ingredients]
-    }
-    req.body.ingredients = req.body.ingredients.filter(item => item.length > 0)
-  }
   if (req.body.categories && typeof req.body.categories === 'string') {
     req.body.categories = [req.body.categories]
   }

@@ -49,7 +49,8 @@
       <button type="button" class="btn" onclick="addPhoto();">+</button>
     </div>
   </div>
-  <div>
+  <!-- deprecated, moved ingredients to textbox -->
+  <!-- <div>
     <div class="form-group row">
       <label for="ingredients" class="col-2 col-form-label">Ingredients</label>
       <div class="col">
@@ -59,16 +60,16 @@
             <input type="text" class="form-control" name="ingredients" id="ingredients" value='{{this}}' placeholder="Chicken">
           {{/each}}
           {{else}}
-            <input type="text" class="form-control" name="ingredients" id="ingredients" placeholder="Chicken">
+            <input type="text" class="form-control" name="ingredients" id="ingredients" placeholder="DONT USE">
           {{/if}}
         </div>
         <button type="button" class="btn" onclick="addIngredient();">+</button>
       </div>
     </div>
-  </div>
+  </div> -->
   <div>
     <div class="form-group row">
-      <label for="instructions" class="col-2 col-form-label">Instructions</label>
+      <label for="instructions" class="col-2 col-form-label">Ingredients/Instructions</label>
       <div class="col">
         <div id="summernote"></div>
         <input type="hidden" id="instructions" name="instructions" {{#if this.instructions}}value='{{this.instructions}}'{{/if}}>
