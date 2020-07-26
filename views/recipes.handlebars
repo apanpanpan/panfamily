@@ -41,7 +41,7 @@ $('select').selectpicker();
   {{/unless}}
   <div class="col-md-{{math 12 "/" (tilesPerRow ../size)}}">
     <div data-toggle="modal" data-target="#foodItem{{@index}}">
-      <img class="food-img-{{../size}}" src="{{this.url.[0]}}"></img>
+      <img class="lazy food-img-{{../size}}" data-src="{{this.url.[0]}}"></img>
     </div>
     <a class="recipe-link" href="/recipe?id={{this._id}}"><p class="text-center tile-caption-{{../size}}">{{truncate this.name ../size}}</p></a>
   </div>
@@ -65,7 +65,7 @@ $('select').selectpicker();
               <div class="carousel-inner" data-interval="50">
                 {{#each this.url}}
                   <div class="carousel-item {{#if (math @index "=" 0)}}active{{/if}}">
-                    <img src={{this}} class="food-img-modal d-block w-100">
+                    <img data-src={{this}} class="lazy food-img-modal d-block w-100">
                   </div>
                 {{/each}}
               </div>
@@ -125,6 +125,60 @@ $('select').selectpicker();
 {{/each}}
 
 <script>
+// lazy loading images
+document.addEventListener("DOMContentLoaded", function() {
+  var lazyloadImages;
+
+  if ("IntersectionObserver" in window) {
+    lazyloadImages = document.querySelectorAll(".lazy");
+    var imageObserver = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var image = entry.target;
+          image.src = image.dataset.src;
+          image.classList.remove("lazy");
+          imageObserver.unobserve(image);
+        }
+      });
+    });
+
+    lazyloadImages.forEach(function(image) {
+      imageObserver.observe(image);
+    });
+  } else {
+    var lazyloadThrottleTimeout;
+    lazyloadImages = document.querySelectorAll(".lazy");
+
+    function lazyload () {
+      if(lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout);
+      }
+
+      lazyloadThrottleTimeout = setTimeout(function() {
+        var scrollTop = window.pageYOffset;
+        lazyloadImages.forEach(function(img) {
+            if(img.offsetTop < (window.innerHeight + scrollTop)) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+            }
+        });
+        if(lazyloadImages.length == 0) {
+          document.removeEventListener("scroll", lazyload);
+          window.removeEventListener("resize", lazyload);
+          window.removeEventListener("orientationChange", lazyload);
+        }
+      }, 20);
+    }
+
+    document.addEventListener("scroll", lazyload);
+    window.addEventListener("resize", lazyload);
+    window.addEventListener("orientationChange", lazyload);
+  }
+})
+
+
+
+
 arr = []
 {{#each this.categories}}
   arr.push("{{this}}")
