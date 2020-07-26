@@ -50,6 +50,17 @@ p[class^="tile-caption"] {
 }
 
 /* recipes: modal view */
+.recipe-link {
+ color: black;
+}
+
+.recipe-link:hover {
+  color: black;
+  opacity: .6;
+  transition: 0.25s ease;
+  text-decoration: none;
+}
+
 .food-img-modal {
   min-height: 300px;
   height: 28vw;

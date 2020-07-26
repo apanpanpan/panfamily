@@ -43,7 +43,7 @@ $('select').selectpicker();
     <div data-toggle="modal" data-target="#foodItem{{@index}}">
       <img class="food-img-{{../size}}" src="{{this.url.[0]}}"></img>
     </div>
-    <p class="text-center tile-caption-{{../size}}">{{truncate this.name ../size}}</p>
+    <a class="recipe-link" href="/recipe?id={{this._id}}"><p class="text-center tile-caption-{{../size}}">{{truncate this.name ../size}}</p></a>
   </div>
 
   <!-- pop up -->
@@ -51,7 +51,7 @@ $('select').selectpicker();
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="#foodItem{{@index}}Name"><a href="/recipe?id={{this._id}}">{{this.name}}</a></h5>
+        <h4 class="modal-title" id="#foodItem{{@index}}Name"><a class="recipe-link" href="/recipe?id={{this._id}}">{{this.name}}</a></h4>
         <form method="GET" action='/editRecipe'>
           <input type="hidden" name="id" value="{{this._id}}">
           <button class="btn"><img src="/editIcon.svg" width=25 style="padding-left:4px; padding-bottom:2px"></button>
