@@ -38,11 +38,15 @@
       <div id="photos-group">
         {{#if this.url}}
         {{#each this.url}}
-          <input type="text" class="form-control" name="url" id="imageURL{{@index}}" value='{{this}}' placeholder="photos.google.com/hi" onkeyup="imagePreview({{@index}})">
+          <input type="text" class="form-control" name="url" id="imageURL{{@index}}" value='{{this}}' placeholder="photos.google.com/hi" onkeyup="imagePreview({{@index}})" style="width: 85%; display: inline">
+          <input type="file" accept="image/*" class="form-control" name="uploadedPhoto" id="uploadedPhoto{{@index}}" onchange="uploadPhoto({{@index}})" style="display: none;">
+          <input type="button" value="Browse..." class="btn" onclick="document.getElementById('uploadedPhoto{{@index}}').click();">
           <img id="imageURLPreview{{@index}}" src='{{this}}' class="show-preview-img">
         {{/each}}
         {{else}}
-          <input type="text" class="form-control" name="url" id="imageURL0" placeholder="photos.google.com/hi" required onkeyup="imagePreview(0)">
+          <input type="text" class="form-control" name="url" id="imageURL0" placeholder="photos.google.com/hi" required onkeyup="imagePreview(0)" style="width: 85%; display: inline">
+          <input type="file" accept="image/*" class="form-control" name="uploadedPhoto" id="uploadedPhoto0" onchange="uploadPhoto(0)" style="display: none;">
+          <input type="button" value="Browse..." class="btn" onclick="document.getElementById('uploadedPhoto0').click();">
           <img id="imageURLPreview0" class="hide-preview-img">
         {{/if}}
       </div>
@@ -101,6 +105,7 @@
 </form>
 
 <script>
+$(document).ready( function() {
 $('#summernote').summernote({
         placeholder: '1. Beat 6 eggs...',
         minHeight: 150,
@@ -143,4 +148,5 @@ $('#message').modal('show')
 {{/if}}
 
 count={{#if this.url}}{{this.url.length}}{{else}}0{{/if}}
+})
 </script>
