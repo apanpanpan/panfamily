@@ -134,7 +134,13 @@ var sn = document.getElementsByClassName('note-editable')
 for (i=0; i<sn.length; i++) {
   sn[i].innerHTML = ""
 }
-$('#summernote').summernote('pasteHTML', '{{{this.instructions}}}')
+
+try {
+$('#summernote').summernote('pasteHTML', `{{{this.instructions}}}`)
+} catch(e) {
+  alert("An error occured loading text, please reload this page");
+  $('#summernote').summernote('insertText', 'Please reload page. Do not save.');
+}
 {{/if}}
 
 arr = []
